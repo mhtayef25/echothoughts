@@ -8,9 +8,9 @@ from core.models import User
 @admin.register(User)
 class UserAdmin(BaseUser):
     add_fieldsets = (
+        (('Personal info'), {'classes': ('wide',),'fields': ('first_name', 'last_name')}),
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'username', 'password1', 'password2'),
         }),
-        (('Personal info'), {'fields': ('first_name', 'last_name')}),
     )
