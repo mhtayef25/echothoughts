@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = ">=3.2,<4.00"
+pillow = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
