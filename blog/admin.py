@@ -8,6 +8,8 @@ from .models import Blog, Category, Comment, Profile, Section
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['id','user','first_name','last_name']
     search_fields = ['user__first_name__istartswith','user__last_name__istartswith']
+    list_per_page = 100
+    ordering = ['user']
 
     @admin.display(ordering='user__first_name')
     def first_name(self,profile):
@@ -21,6 +23,7 @@ class ProfileAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title']
     search_fields = ['title__istartswith']
+    list_per_page = 30
 
 
 class SectionInline(admin.StackedInline):
@@ -30,12 +33,16 @@ class SectionInline(admin.StackedInline):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     inlines = [SectionInline]
-    list_display = ['header','author','created_at','update_at']
+    list_display = ['header','author','category','status','created_at','update_at']
     autocomplete_fields = ['author','category']
     search_fields = ['header__istartswith']
-    list_filter = ['created_at','update_at']
+    list_filter = ['category','status','created_at','update_at']
+    ordering = ['status','created_at','update_at']
+    list_per_page = 100
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['blog','commenter','created_at','update_at']
     autocomplete_fields = ['blog','commenter']
+    ordering = ['blog']
+    list_per_page = 100
