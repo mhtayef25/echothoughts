@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
             name='Blog',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('category', models.ForeignKey(default='', on_delete=django.db.models.deletion.PROTECT, to='blog.category')),
                 ('header', models.TextField()),
                 ('cover_photo', models.ImageField(upload_to='blog/cover_photo/')),
                 ('status', models.CharField(choices=[('u', 'Undecided'), ('p', 'Published'), ('s', 'Secret')], default='u', max_length=1)),
@@ -52,7 +53,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('bio', models.CharField(max_length=128)),
                 ('photo', models.ImageField(upload_to='profile/photo')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
@@ -61,7 +62,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('update_at', models.DateTimeField(auto_now=True)),
                 ('blog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.blog')),
                 ('commenter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='commenters', to='blog.profile')),
             ],
