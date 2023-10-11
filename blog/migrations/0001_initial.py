@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Blog',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('category', models.ForeignKey(default='', on_delete=django.db.models.deletion.PROTECT, to='blog.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='blog.category')),
                 ('header', models.TextField()),
                 ('cover_photo', models.ImageField(upload_to='blog/cover_photo/')),
                 ('status', models.CharField(choices=[('u', 'Undecided'), ('p', 'Published'), ('s', 'Secret')], default='u', max_length=1)),

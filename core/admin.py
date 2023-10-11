@@ -5,6 +5,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from blog.admin import BlogAdmin
 from blog.models import Blog
 from core.models import User
+from likes.models import LikedItem
 from tag.models import TaggedItem
 
 # Register your models here.
@@ -24,8 +25,12 @@ class TagInline(GenericTabularInline):
     model = TaggedItem
     extra = 1
 
+class LikeInline(GenericTabularInline):
+    model = LikedItem
+    extra = 1
+
 class CustomBlogAdmin(BlogAdmin):
-    inlines = BlogAdmin.inlines + [TagInline]
+    inlines = BlogAdmin.inlines + [TagInline,LikeInline]
 
 admin.site.unregister(Blog)
 admin.site.register(Blog,CustomBlogAdmin)
