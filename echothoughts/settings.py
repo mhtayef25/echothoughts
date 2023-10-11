@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "debug_toolbar",
+    'rest_framework',
+    'djoser',
     'blog',
     'core',
     'tag',
@@ -137,3 +140,22 @@ AUTH_USER_MODEL = 'core.User'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+   "AUTH_HEADER_TYPES": ("JWT",),
+    }
+
+DJOSER = {
+    'SERIALIZERS':{
+        'user': 'core.serializers.UserSerializer',
+        'current_user': 'core.serializers.UserSerializer',
+        'user_create': 'core.serializers.UserCreateSerializer',
+    }
+}

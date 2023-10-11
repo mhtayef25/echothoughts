@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = ">=3.2,<4.00"
 pillow = "*"
+djoser = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
